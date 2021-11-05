@@ -1,0 +1,29 @@
+
+.container {
+  height: 100%;
+  width: 100%;
+  float: right;
+}
+
+.leftPanel {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  padding-top: 10%;
+}
+
+.panelButton {
+  color:aliceblue;
+  padding-left: 20px;
+}
+
+.rightPanel{
+  position: fixed;
+  top: 0;
+  left: 20%;
+  height: 100%;
+  width: 80%;
+}

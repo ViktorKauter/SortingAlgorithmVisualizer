@@ -1,0 +1,19 @@
+.flexContainer{
+    flex-direction: column;
+    background-color: #007ACC;
+    height: 80%;
+    width: 100%;
+}
+.leftBox{
+    float: right;
+}
+.buttonsWrapper{
+
+}
+.canvasWrapper {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    flex-basis: auto; /* default auto */
+
+}
