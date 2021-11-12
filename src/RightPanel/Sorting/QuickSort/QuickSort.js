@@ -9,11 +9,9 @@ import '../Sort.css';
 var data = new Data(100);
 var countOfElements = 100;
 
-var indexes = new Object();
-indexes.leftIndex=0;
-indexes.rightIndex=data.data.length-1;
-indexes.middleIndex=indexes.rightIndex;
-
+var leftIndex=0;
+var rightIndex=99;
+var middleIndex=rightIndex;
 var switches = 0;
 var switchLimit =1;
 
@@ -25,15 +23,14 @@ function QuickSort(){
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d')
     
-            if(switches == switchLimit){
-                drawCanvas(canvas);
-                drawBoxes(ctx, data.data, data.color);
-                switches=0;
-            }
+            drawCanvas(canvas);
+            drawBoxes(ctx, data.data, data.color);
             
-            console.log("left="+indexes.leftIndex)
+            //console.log("left="+leftIndex)
+            //console.log("switches="+switches)
 
-            sortingStep(indexes.leftIndex,indexes.middleIndex,indexes.rightIndex)
+
+            sortingStep(leftIndex,middleIndex,rightIndex)
 
             requestAnimationFrame(render);
         }
@@ -68,42 +65,57 @@ function start(){
 
 function reInitialize(){
     data = new Data(countOfElements);
-    indexes.leftIndex=0;
-    indexes.rightIndex=data.data.length-1;
-    indexes.middleIndex=indexes.rightIndex;
+    leftIndex=0;
+    rightIndex=data.data.length-1;
+    middleIndex=rightIndex;
 }
 
 function handleCountChange(event){
     countOfElements=event.target.value;
 }
 
-function sortingStep(leftIndex,middleIndex,rightIndex){
+function sortingStep(){
 
-    var middleValue = data.data[indexes.middleIndex];
-    
-    while(data.data[indexes.rightIndex]>=indexes.middleValue 
-        && indexes.leftIndex <indexes.rightIndex){
-            indexes.rightIndex = indexes.rightIndex - 1;
+    var middleValue = data.data[middleIndex];
+    console.log("rightIndexFirst="+rightIndex)
+
+    while(data.data[rightIndex]>=middleValue 
+        && leftIndex <rightIndex){
+            
+            rightIndex--;
     }
 
-    while(data.data[indexes.leftIndex]<indexes.middleValue 
-        && indexes.leftIndex <indexes.rightIndex){
-        indexes.leftIndex = indexes.leftIndex - 1;;
+    console.log("rightIndex="+rightIndex)
+
+    console.log("leftIndex before:"+leftIndex)
+
+    while(data.data[leftIndex]<middleValue 
+        && leftIndex <rightIndex){
+            
+            leftIndex++;
+            switches++;
     }
+    console.log("leftIndex"+leftIndex)
+    console.log("switches:"+switches)
+
+
     
-    if(indexes.leftIndex == indexes.leftIndex){
+    if(leftIndex === rightIndex){
+        console.log("meet!")
         //new middleIndex
-        indexes.middleIndex = indexes.rightIndex-1
-        indexes.leftIndex = 0;
+        middleIndex = rightIndex-1
+        leftIndex = 0;
         return;
     }
 
     
     //swap elements
-    var x = data.data[indexes.leftIndex];  
-    data.data[indexes.leftIndex]=data.data[indexes.rightIndex]; 
-    data.data[indexes.rightIndex] = x;
-    switches++;
+    var x = data.data[leftIndex];  
+    data.data[leftIndex]=data.data[rightIndex]; 
+    data.data[rightIndex] = x;
+    //switches++;
+    console.log("switches:"+switches)
+    
 }
 
 export default QuickSort;

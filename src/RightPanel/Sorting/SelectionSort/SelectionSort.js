@@ -30,7 +30,7 @@ function SelectionSort(){
             
             if(startingElement<data.count && startingElement>=0){
                 sortingStep(startingElement);
-                startingElement++;
+                //startingElement++;
             }
             //console.log(startingElement);
             requestAnimationFrame(render);
@@ -89,6 +89,7 @@ function sortingStep(sElement){
     data.data[j]=data.data[sElement]; 
     data.data[sElement] = x;  
     switches++;
+    startingElement++;
 }
 
 export default SelectionSort;
