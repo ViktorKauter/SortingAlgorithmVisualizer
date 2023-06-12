@@ -6,7 +6,7 @@ import DummySort from '../DummySort/DummySort';
 import '../Sort.css';
 
 
-var countOfElements = 5;
+var countOfElements = 1000;
 var data = Array.from({length: countOfElements}, () => Math.floor(Math.random() * 100));
 
 var sortingAlgorithmCanvas;
@@ -91,7 +91,7 @@ function handleCountChange(event){
     countOfElements=event.target.value;
 }
 
-function sortingStep(leftIndex,rightIndex){
+async function sortingStep(leftIndex,rightIndex){
     console.log("leftInput="+leftIndex+";rightInput="+rightIndex)
     //save values for later
     var leftInput=leftIndex;
@@ -101,35 +101,44 @@ function sortingStep(leftIndex,rightIndex){
     if(leftIndex>=rightIndex){
         return;
     }
+    leftIndex-=1
+    rightIndex+=1
+
     const mid = Math.floor((rightInput+leftInput)/2)
     var pivot = sortingAlgorithmCanvas.getElement(mid);
     console.log("pivot="+pivot)
     console.log(sortingAlgorithmCanvas.getDataArray())
 
     while(leftIndex<rightIndex){
-        while(sortingAlgorithmCanvas.getElement(leftIndex)<pivot){    
+        do{
             leftIndex++;
-        }
+        } while(sortingAlgorithmCanvas.getElement(leftIndex)<pivot);
 
-        while(sortingAlgorithmCanvas.getElement(rightIndex)>pivot && rightIndex>leftIndex){                
-                rightIndex--;
-        }
+        do{
+            rightIndex--;
+        } while(sortingAlgorithmCanvas.getElement(rightIndex)>pivot);
 
         //Swap if condition is met
         if(leftIndex<rightIndex){
             sortingAlgorithmCanvas.swapElements(leftIndex,rightIndex);
+            console.log("swap:"+leftIndex+";"+rightIndex)
+            sortingAlgorithmCanvas.drawToCanvas();
+            await new Promise(r => setTimeout(r, 50));
         } else {
-            continue
+            //continue
+            var meetingPoint=rightIndex;
+            sortingStep(meetingPoint+1,rightInput)
+            sortingStep(leftInput,meetingPoint)
         }
-        sortingAlgorithmCanvas.drawToCanvas();
+        //sortingAlgorithmCanvas.drawToCanvas();
         //await new Promise(r => setTimeout(r, 50));
 
     }
         //console.log("rightIndex="+rightIndex)
         //console.log("rightInput="+rightInput)
-        var meetingPoint=leftIndex;
-        sortingStep(meetingPoint+1,rightInput)
-        sortingStep(leftInput,meetingPoint)
+        // var meetingPoint=leftIndex;
+        // sortingStep(meetingPoint+1,rightInput)
+        // sortingStep(leftInput,meetingPoint)
         return;
 
     

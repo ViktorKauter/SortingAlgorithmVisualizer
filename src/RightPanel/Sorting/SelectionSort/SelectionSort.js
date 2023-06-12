@@ -6,9 +6,9 @@ import '../Sort.css';
 
 
 
-var data = new Data(10000);
+var data = new Data(1000);
 var startingElement = 0;
-var countOfElements = 10000;
+var countOfElements = 1000;
 var switches = 0;
 var switchLimit =20;
 
@@ -87,7 +87,8 @@ function sortingStep(sElement){
         }
     }
     data.data[j]=data.data[sElement]; 
-    data.data[sElement] = x;  
+    data.data[sElement] = x;
+    //await new Promise(r => setTimeout(r, 50));  
     switches++;
     startingElement++;
 }
