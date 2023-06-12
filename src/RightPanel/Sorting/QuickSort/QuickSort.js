@@ -85,8 +85,6 @@ function reInitialize(){
     middleIndex=rightIndex;
     sortingAlgorithmCanvas = new SortingAlgorithmCanvas(context, data);
     sortingStep(leftIndex,rightIndex)
-    console.log("initial")
-    console.log(sortingAlgorithmCanvas.getDataArray())
 }
 
 function handleCountChange(event){
@@ -94,65 +92,45 @@ function handleCountChange(event){
 }
 
 function sortingStep(leftIndex,rightIndex){
+    console.log("leftInput="+leftIndex+";rightInput="+rightIndex)
     //save values for later
     var leftInput=leftIndex;
     var rightInput=rightIndex;
 
     //termination condition
-    if(leftIndex==rightIndex){
+    if(leftIndex>=rightIndex){
         return;
     }
-
-    middleIndex=Math.floor((rightIndex-leftIndex)/2+leftIndex)
-    var middleValue = sortingAlgorithmCanvas.getElement(middleIndex);
+    const mid = Math.floor((rightInput+leftInput)/2)
+    var pivot = sortingAlgorithmCanvas.getElement(mid);
+    console.log("pivot="+pivot)
+    console.log(sortingAlgorithmCanvas.getDataArray())
 
     while(leftIndex<rightIndex){
-
-        
-        //console.log("rightIndexFirst="+rightIndex)
-        while(sortingAlgorithmCanvas.getElement(leftIndex)<middleValue 
-        && leftIndex <rightIndex){
-            
+        while(sortingAlgorithmCanvas.getElement(leftIndex)<pivot){    
             leftIndex++;
         }
 
-        while(sortingAlgorithmCanvas.getElement(rightIndex)>=middleValue 
-            && leftIndex <rightIndex){                
+        while(sortingAlgorithmCanvas.getElement(rightIndex)>pivot && rightIndex>leftIndex){                
                 rightIndex--;
         }
 
-        //console.log("rightIndex="+rightIndex)
-        //console.log("leftIndex before:"+leftIndex)
-
-  
-
-
-        console.log("("+leftInput+";"+rightInput+")"+middleIndex+"="+middleValue+"("+leftIndex+";"+rightIndex+")")
-        console.log("before")
-        console.log(sortingAlgorithmCanvas.getDataArray())
-
         //Swap if condition is met
-        sortingAlgorithmCanvas.swapElements(leftIndex,rightIndex);
-        
-
-        console.log("after")
-        console.log(sortingAlgorithmCanvas.getDataArray())
+        if(leftIndex<rightIndex){
+            sortingAlgorithmCanvas.swapElements(leftIndex,rightIndex);
+        } else {
+            continue
+        }
         sortingAlgorithmCanvas.drawToCanvas();
-
         //await new Promise(r => setTimeout(r, 50));
-        console.log("draw");
-    }
 
-    
-    if(leftIndex === rightIndex){
-        console.log("meet!")
-        //new middleIndex
-        var meetingPoint=rightIndex;
+    }
+        //console.log("rightIndex="+rightIndex)
+        //console.log("rightInput="+rightInput)
+        var meetingPoint=leftIndex;
         sortingStep(meetingPoint+1,rightInput)
         sortingStep(leftInput,meetingPoint)
-        //sortingStep(meetingPoint+1,rightInput,rightInput)
         return;
-    }
 
     
 }
