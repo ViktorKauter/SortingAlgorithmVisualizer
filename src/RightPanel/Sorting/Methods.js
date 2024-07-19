@@ -19,14 +19,31 @@ function fitToContainer(canvas){
 
 
 export function drawBoxes(ctx, data, colors){
-    const boxwidth = ctx.canvas.width/data.length;
+    const boxwidth = ctx.canvas.width/data.data.length;
 
     var i = 0;
-    data.forEach(element => {
-      ctx.fillStyle = '#FFFFFF'
-      var boxheight=element/100*ctx.canvas.height;
+    // data.forEach(element => {
+    //   ctx.fillStyle = '#FFFFFF'
+    //   var boxheight=element/100*ctx.canvas.height;
+    //   ctx.fillRect(i*boxwidth,ctx.canvas.height-boxheight , boxwidth, boxheight);
+    //   i++
+    // });
+    for(var i=0;i<data.count;i++){
+      if (data.colors.red[i]==0 && data.colors.blue[i]==0){
+        ctx.fillStyle = '#FFFFFF'
+      }
+      if (data.colors.red[i]>0){
+        data.colors[i]-=1
+        ctx.fillStyle = '#C21E56'
+      }
+
+      if (data.colors.blue[i]>0){
+        data.colors[i]-=1
+        ctx.fillStyle = '#088F8F'
+      }
+      var boxheight=data.data[i]/100*ctx.canvas.height;
       ctx.fillRect(i*boxwidth,ctx.canvas.height-boxheight , boxwidth, boxheight);
-      i++
-    });
+
+    }
 }
 

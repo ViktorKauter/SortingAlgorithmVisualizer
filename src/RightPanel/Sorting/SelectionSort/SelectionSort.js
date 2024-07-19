@@ -8,9 +8,9 @@ import '../Sort.css';
 
 var data = new Data(1000);
 var startingElement = 0;
-var countOfElements = 1000;
+var countOfElements = 20;
 var switches = 0;
-var switchLimit =20;
+var switchLimit =1;
 
 
 function SelectionSort(){
@@ -23,7 +23,7 @@ function SelectionSort(){
     
             if(switches == switchLimit){
                 drawCanvas(canvas);
-                drawBoxes(ctx, data.data, data.color);
+                drawBoxes(ctx, data, data.color);
                 switches=0;
             }
             
@@ -81,6 +81,8 @@ function sortingStep(sElement){
     //find minimal Element in Remainder
     for(var i=sElement;i<data.data.length;i++){
         y = data.data[i]
+        data.colors.blue[i]=2
+        //await new Promise(r => setTimeout(r,100))
         if(y<x){
             x =y;
             j= i;
@@ -88,6 +90,8 @@ function sortingStep(sElement){
     }
     data.data[j]=data.data[sElement]; 
     data.data[sElement] = x;
+    data.colors.red[sElement]=10
+    data.colors.red[j]=10
     //await new Promise(r => setTimeout(r, 50));  
     switches++;
     startingElement++;
