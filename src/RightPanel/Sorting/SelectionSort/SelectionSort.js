@@ -34,7 +34,7 @@ function SelectionSort(){
 
             if(startingElement>=0){
                 sortingStep(startingElement);
-                wait(20)
+                wait(2)
                 //startingElement++;
             }
             /*
