@@ -15,7 +15,13 @@ function fitToContainer(canvas){
     canvas.height = canvas.offsetHeight;
   }
 
-
+export function wait(ms) {
+    var start = Date.now(),
+        now = start;
+    while (now - start < ms) {
+      now = Date.now();
+    }
+}
 
 
 export function drawBoxes(ctx, data, colors){
@@ -33,12 +39,12 @@ export function drawBoxes(ctx, data, colors){
         ctx.fillStyle = '#FFFFFF'
       }
       if (data.colors.red[i]>0){
-        data.colors[i]-=1
+        data.colors.red[i]-=1
         ctx.fillStyle = '#C21E56'
       }
 
       if (data.colors.blue[i]>0){
-        data.colors[i]-=1
+        data.colors.blue[i]-=1
         ctx.fillStyle = '#088F8F'
       }
       var boxheight=data.data[i]/100*ctx.canvas.height;
