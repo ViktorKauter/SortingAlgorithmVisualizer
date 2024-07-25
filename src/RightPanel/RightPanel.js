@@ -10,9 +10,9 @@ function RightPanel() {
           <div className='flexDiv'>
             <SelectionSort/>
           </div>
-          {/* <div className='flexDiv'>
+          <div className='flexDiv'>
             <QuickSort/>
-          </div> */}
+          </div>
       </div>
 
 

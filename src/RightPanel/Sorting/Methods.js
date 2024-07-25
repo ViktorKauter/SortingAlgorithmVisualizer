@@ -23,6 +23,18 @@ export function wait(ms) {
     }
 }
 
+export function wait2(ms){
+  const wait = (msec) => new Promise((resolve, _) => {
+    setTimeout(resolve, msec);
+  });
+  
+  (async () => {
+    console.log("Start...")
+    await wait(5000);
+    console.log("...End")
+  })();
+}
+
 
 export function drawBoxes(ctx, data, colors){
     const boxwidth = ctx.canvas.width/data.data.length;
