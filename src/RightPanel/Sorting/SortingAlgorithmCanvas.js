@@ -59,7 +59,9 @@ export default class SortingAlgorithmCanvas{
   } 
 
     getElement(i){
+        this.colors.blue[i]=5
         return this.data[i];
+
     }
 
     getDataArray(){
@@ -70,5 +72,7 @@ export default class SortingAlgorithmCanvas{
         var temp = this.data[i];  
         this.data[i]=this.data[j]; 
         this.data[j] = temp;
+        this.colors.red[i]=20
+        this.colors.red[j]=20
     }
 }
